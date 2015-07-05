@@ -24,14 +24,14 @@ RUN curl -o etcd-v${ETCD_VERSION}-linux-amd64.tar.gz \
     && tar -xzvf etcd-v${ETCD_VERSION}-linux-amd64.tar.gz \
     && mv etcd-v${ETCD_VERSION}-linux-amd64/etcd /usr/bin/etcd \
     && mv etcd-v${ETCD_VERSION}-linux-amd64/etcdctl /usr/bin/etcdctl \
+    && chmod 755 /usr/bin/etcd* \
     && rm -rf etcd-v${ETCD_VERSION}-linux-amd64.tar.gz etcd-v${ETCD_VERSION}-linux-amd64
 
 # Download and install Kubernetes.
 RUN for b in kube-apiserver kube-proxy kube-scheduler kube-controller-manager kubelet kubectl; do \
       curl -o /usr/bin/${b} -L ${KUBERNETES_RELEASE_URL}/${b}; \
+      chmod 755 /usr/bin/${b}; \
     done
 
 # Make nsenter available at / for the kubelet in a container hack.
 RUN ln -s /usr/bin/nsenter /nsenter
-
-RUN chmod 755 /usr/bin/kube* /usr/bin/etcd*
