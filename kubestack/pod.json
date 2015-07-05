@@ -6,9 +6,8 @@
     "hostNetwork": true,
     "containers": [{
       "name": "etcd",
-      "image": "kelseyhightower/kubeos:0.20.2",
+      "image": "kelseyhightower/etcd:2.0.13",
       "command": [
-        "/usr/bin/etcd",
         "--data-dir=/var/lib/etcd",
         "--advertise-client-urls=http://127.0.0.1:2379",
         "--listen-client-urls=http://127.0.0.1:2379",
@@ -18,9 +17,8 @@
     },
     {
       "name": "kube-apiserver",
-      "image": "kelseyhightower/kubeos:0.20.2",
+      "image": "kelseyhightower/kube-apiserver:0.20.2",
       "command": [
-        "/usr/bin/kube-apiserver",
         "--allow-privileged",
         "--etcd-servers=http://127.0.0.1:2379",
         "--service-cluster-ip-range=10.200.20.0/24",
@@ -29,27 +27,24 @@
     },
     {
       "name": "kube-controller-manager",
-      "image": "kelseyhightower/kubeos:0.20.2",
+      "image": "kelseyhightower/kube-controller-manager:0.20.2",
       "command": [
-        "/usr/bin/kube-controller-manager",
         "--master=http://127.0.0.1:8080",
         "--v=2"
       ]
     },
     {
       "name": "kube-scheduler",
-      "image": "kelseyhightower/kubeos:0.20.2",
+      "image": "kelseyhightower/kube-scheduler:0.20.2",
       "command": [
-        "/usr/bin/kube-scheduler",
         "--master=http://127.0.0.1:8080",
         "--v=2"
       ]
     },
     {
       "name": "kube-proxy",
-      "image": "kelseyhightower/kubeos:0.20.2",
+      "image": "kelseyhightower/kube-proxy:0.20.2",
       "command": [
-        "/usr/bin/kube-proxy",
         "--master=http://127.0.0.1:8080",
         "--v=2"
       ],
