@@ -10,7 +10,6 @@ LABEL etcd.version="2.0.13"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
-    curl \
     iptables \
     util-linux
 
